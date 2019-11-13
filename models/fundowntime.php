@@ -1,6 +1,6 @@
 <?php 
   class fundowntime {
-    // DB stuff
+    // DB stuff /edit
     private $conn;
     private $table_t1 = 'kpi_downcodes';
     private $table_t2 = 'kpi_bittypedowns';

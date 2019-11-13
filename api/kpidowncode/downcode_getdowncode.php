@@ -1,5 +1,5 @@
 <?php 
-  // Headers
+  // Headers /edit
   //http://localhost/api/api/kpidowncode/downcode_getdowncode.php?downcode=s1
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
