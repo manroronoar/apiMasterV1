@@ -1,7 +1,7 @@
 <?php 
   class Getjsons 
   {
-    // DB stuff
+    // DB stuff   
     private $conn;
     private $table = 'kpi_getnodejsons';
 
