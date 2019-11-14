@@ -30,8 +30,8 @@
       $this->Gn_hmstr = htmlspecialchars(strip_tags($this->Gn_hmstr));
       $this->Gn_sec = htmlspecialchars(strip_tags($this->Gn_sec));
       $this->Gn_tsupd = htmlspecialchars(strip_tags($this->Gn_tsupd));
-      $this->created_at = htmlspecialchars(strip_tags($this->created_at));
-      $this->updated_at = htmlspecialchars(strip_tags($this->updated_at));
+      //$this->created_at = htmlspecialchars(strip_tags($this->created_at));
+      //$this->updated_at = htmlspecialchars(strip_tags($this->updated_at));
     }
 
   
@@ -69,7 +69,17 @@
    }
       
     public function create() {
+      //define('CONST_SERVER_TIMEZONE', 'Asia/Bangkok');
+      date_default_timezone_set("Asia/Bangkok");
     
+      $format = '%Y-%m-%d %H:%M:%S';
+      $strfc = strftime($format); 
+      $strfu = strftime($format); 
+      //echo "\n$strf";
+      
+     // print_r(strptime($strf, $format));
+
+
       $result = $this->check_row();
       $num = $result->rowCount();
      
@@ -91,8 +101,14 @@
       $stmt->bindParam(':Gn_hmstr', $this->Gn_hmstr);
       $stmt->bindParam(':Gn_sec', $this->Gn_sec);
       $stmt->bindParam(':Gn_tsupd', $this->Gn_tsupd);
-      $stmt->bindParam(':created_at', $this->created_at);
-      $stmt->bindParam(':updated_at', $this->updated_at);
+      $stmt->bindParam(':created_at', $strfc);
+      $stmt->bindParam(':updated_at', $strfu);
+
+
+      //$stmt->bindParam(':created_at', $this->created_at);
+      //$stmt->bindParam(':updated_at', $this->updated_at);
+    // $now = new DateTime('now')->format('Y-m-d H:i:s');
+    
       
 
       if ($num < 1 )

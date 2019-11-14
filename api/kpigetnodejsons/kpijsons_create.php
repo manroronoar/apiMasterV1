@@ -39,17 +39,17 @@
     {
       foreach($obj_array as $row) 
         {
-        $getjson->Gn_id = $row['Gn_id'];
-        $getjson->Gn_node = $row['Gn_node'];
-        $getjson->Gn_astid = $row['Gn_astid'];
-        $getjson->Gn_iobit = $row['Gn_iobit'];
-        $getjson->Gn_ts = $row['Gn_ts'];
-        $getjson->Gn_dmystr = $row['Gn_dmystr'];
-        $getjson->Gn_hmstr = $row['Gn_hmstr'];
-        $getjson->Gn_sec = $row['Gn_sec'];
-        $getjson->Gn_tsupd = $row['Gn_tsupd'];
-        $getjson->created_at = $row['created_at'];
-        $getjson->updated_at = $row['updated_at'];
+        $getjson->Gn_id = $row['_id'];
+        $getjson->Gn_node = $row['node'];
+        $getjson->Gn_astid = $row['astid'];
+        $getjson->Gn_iobit = $row['iobit'];
+        $getjson->Gn_ts = $row['ts'];
+        $getjson->Gn_dmystr = $row['dmystr'];
+        $getjson->Gn_hmstr = $row['hmstr'];
+        $getjson->Gn_sec = $row['sec'];
+        $getjson->Gn_tsupd = $row['tsupd'];
+       // $getjson->created_at = $row['created_at'];
+       // $getjson->updated_at = $row['updated_at'];
      
         $getjson->create();
         }
