@@ -67,6 +67,15 @@
           return true;  
         }
    }
+
+   private function check_findbit($findbit) {
+   
+    $findbits = strpos($findbit,"1");
+    $findbitss = $findbits + 1;
+    return  $findbitss;
+    
+   }
+   
       
     public function create() {
       //define('CONST_SERVER_TIMEZONE', 'Asia/Bangkok');
@@ -82,12 +91,19 @@
 
       $result = $this->check_row();
       $num = $result->rowCount();
+
+      $resultfindbit = $this->check_findbit($this->Gn_iobit);
+      
+  
      
       // Create query
-      $query = 'INSERT INTO ' .$this->table.
-      ' (Gn_id,Gn_node,Gn_astid,Gn_iobit,Gn_ts,Gn_dmystr,Gn_hmstr,Gn_sec,Gn_tsupd,created_at,updated_at) 
-      VALUES (:Gn_id,:Gn_node,:Gn_astid,:Gn_iobit,:Gn_ts,:Gn_dmystr,:Gn_hmstr,:Gn_sec,:Gn_tsupd,:created_at,:updated_at)';
-   
+     // $query = 'INSERT INTO ' .$this->table.
+     // ' (Gn_id,Gn_node,Gn_astid,Gn_iobit,Gn_ts,Gn_dmystr,Gn_hmstr,Gn_sec,Gn_tsupd,created_at,updated_at) 
+    //VALUES (:Gn_id,:Gn_node,:Gn_astid,:Gn_iobit,:Gn_ts,:Gn_dmystr,:Gn_hmstr,:Gn_sec,:Gn_tsupd,:created_at,:updated_at)';
+    $query = 'INSERT INTO ' .$this->table.
+      ' (Gn_id,Gn_node,Gn_astid,Gn_iobit,Gn_posbit,Gn_ts,Gn_dmystr,Gn_hmstr,Gn_sec,Gn_tsupd,created_at,updated_at) 
+      VALUES (:Gn_id,:Gn_node,:Gn_astid,:Gn_iobit,:Gn_posbit,:Gn_ts,:Gn_dmystr,:Gn_hmstr,:Gn_sec,:Gn_tsupd,:created_at,:updated_at)';
+      //Gn_posbit
       // Prepare statement
       $stmt = $this->conn->prepare($query);
    
@@ -96,6 +112,7 @@
       $stmt->bindParam(':Gn_node', $this->Gn_node);
       $stmt->bindParam(':Gn_astid', $this->Gn_astid);
       $stmt->bindParam(':Gn_iobit', $this->Gn_iobit);
+      $stmt->bindParam(':Gn_posbit', $resultfindbit);
       $stmt->bindParam(':Gn_ts', $this->Gn_ts);
       $stmt->bindParam(':Gn_dmystr', $this->Gn_dmystr);
       $stmt->bindParam(':Gn_hmstr', $this->Gn_hmstr);
@@ -109,8 +126,7 @@
       //$stmt->bindParam(':updated_at', $this->updated_at);
     // $now = new DateTime('now')->format('Y-m-d H:i:s');
     
-      
-
+  
       if ($num < 1 )
       {
         if($this->check_bit($this->Gn_iobit) == true)
