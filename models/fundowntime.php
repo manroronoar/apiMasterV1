@@ -30,7 +30,7 @@
     }
 
     // Get User all
-    public function get_downcodes() {
+    public function get_downcodes_() {
       // Create query
       $query = 'SELECT * FROM ' . $this->table ;    
 
@@ -42,17 +42,7 @@
       return $stmt;
     }
     public function get_downcode() {
-     // Create query
-     //SELECT `id`, `Dc_Number`, `Dc_Type`, `Dc_Name`, `Dc_Remark`, `Dc_Status`,
-     //`Dc_User`, `created_at`, `updated_at` FROM `kpi_downcodes` WHERE
-     // SELECT  `Bi_Bit`, `Bi_Type`, `Bi_User`, `Dc_Number`, `Dc_Name`, `Dc_Remark`, `Dc_Status`
-     // FROM kpi_bittypedowns
-     // JOIN kpi_downcodes 
-     // ON Bi_Type = Dc_Type
-
-      //$query = 'SELECT  * FROM ' . $this->table . '        
-      //   where Dc_Number = ?';
-
+     // Create query   
       $query = 'SELECT  Bi_Bit, Bi_Type, Dc_Number, Dc_Name, Dc_Remark
        FROM ' . $this->table_t1 .
        ' JOIN '. $this->table_t2 . 

@@ -132,16 +132,19 @@
         if($this->check_bit($this->Gn_iobit) == true)
         {
           if($stmt->execute()) {
+            $stmt->close;
           return true;
           }
           else
           {
+            $stmt->close;
           return false;
           }   
         }   
       }
       else
       {
+        $stmt->close;
         return false;
       }     
     }
