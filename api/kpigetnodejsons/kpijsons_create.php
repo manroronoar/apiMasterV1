@@ -58,7 +58,7 @@
         $getjson->Gn_hsidrawing = $row['drawing'];
         $getjson->Gn_hsimc = $row['mc'];
         $getjson->Gn_hsitargetHour = $row['target'];
-        
+        $getjson->Gn_fixqualitie = $row['oeequalitie'];
 
        // $getjson->created_at = $row['created_at'];
        // $getjson->updated_at = $row['updated_at'];
@@ -71,24 +71,10 @@
       echo $e;
     }
 
-  //$getjson->Gn_id = $data->Gn_id;
-  //$getjson->Gn_node = $data->Gn_node;
-  //$getjson->Gn_astid = $data->Gn_astid;
-  //$getjson->Gn_iobit = $data->Gn_iobit;
-  //$getjson->Gn_ts = $data->Gn_ts;
-  //$getjson->Gn_dmystr = $data->Gn_dmystr;
-  //$getjson->Gn_hmstr = $data->Gn_hmstr;
-  //$getjson->Gn_sec = $data->Gn_sec;
-  //$getjson->Gn_tsupd = $data->Gn_tsupd;
-  //$getjson->created_at = $data->created_at;
-  //$getjson->updated_at = $data->updated_at;
-
-
-
   //if($getjson->create()) {
   //  echo json_encode(
-   //   array('message' => 'Created')
-   // );
+  //   array('message' => 'Created')
+  // );
   //} else {
   //  echo json_encode(
   //    array('message' => 'Not Created')

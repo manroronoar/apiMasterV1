@@ -28,6 +28,7 @@
     public $Gn_hsidrawing;
     public $Gn_hsimc;
     public $Gn_hsitargetHour;
+    public $Gn_fixqualitie;
 
 
     public function __construct($db) {
@@ -51,6 +52,7 @@
       $this->Gn_hsidrawing = htmlspecialchars(strip_tags($this->Gn_hsidrawing));
       $this->Gn_hsimc = htmlspecialchars(strip_tags($this->Gn_hsimc));
       $this->Gn_hsitargetHour = htmlspecialchars(strip_tags($this->Gn_hsitargetHour));
+      $this->Gn_fixqualitie = htmlspecialchars(strip_tags($this->Gn_fixqualitie));
 
       //$this->created_at = htmlspecialchars(strip_tags($this->created_at));
       //$this->updated_at = htmlspecialchars(strip_tags($this->updated_at));
@@ -126,8 +128,8 @@
      // ' (Gn_id,Gn_node,Gn_astid,Gn_iobit,Gn_ts,Gn_dmystr,Gn_hmstr,Gn_sec,Gn_tsupd,created_at,updated_at) 
     //VALUES (:Gn_id,:Gn_node,:Gn_astid,:Gn_iobit,:Gn_ts,:Gn_dmystr,:Gn_hmstr,:Gn_sec,:Gn_tsupd,:created_at,:updated_at)';
     $query = 'INSERT INTO ' .$this->table.
-      ' (Gn_id,Gn_node,Gn_astid,Gn_iobit,Gn_posbit,Gn_ts,Gn_dmystr,Gn_hmstr,Gn_sec,Gn_tsupd,Gn_enoper1,Gn_enoper2,Gn_enpm1,Gn_enpm2,Gn_enpm1oth1,Gn_enpm1oth2,Gn_hsidrawing,Gn_hsimc,Gn_hsitargetHour,created_at,updated_at) 
-      VALUES (:Gn_id,:Gn_node,:Gn_astid,:Gn_iobit,:Gn_posbit,:Gn_ts,:Gn_dmystr,:Gn_hmstr,:Gn_sec,:Gn_tsupd,:Gn_enoper1,:Gn_enoper2,:Gn_enpm1,:Gn_enpm2,:Gn_enpm1oth1,:Gn_enpm1oth2,:Gn_hsidrawing,:Gn_hsimc,:Gn_hsitargetHour,:created_at,:updated_at)';
+      ' (Gn_id,Gn_node,Gn_astid,Gn_iobit,Gn_posbit,Gn_ts,Gn_dmystr,Gn_hmstr,Gn_sec,Gn_tsupd,Gn_enoper1,Gn_enoper2,Gn_enpm1,Gn_enpm2,Gn_enpm1oth1,Gn_enpm1oth2,Gn_hsidrawing,Gn_hsimc,Gn_fixqualitie,Gn_hsitargetHour,created_at,updated_at) 
+      VALUES (:Gn_id,:Gn_node,:Gn_astid,:Gn_iobit,:Gn_posbit,:Gn_ts,:Gn_dmystr,:Gn_hmstr,:Gn_sec,:Gn_tsupd,:Gn_enoper1,:Gn_enoper2,:Gn_enpm1,:Gn_enpm2,:Gn_enpm1oth1,:Gn_enpm1oth2,:Gn_hsidrawing,:Gn_hsimc,:Gn_fixqualitie,:Gn_hsitargetHour,:created_at,:updated_at)';
       //Gn_posbit
       // Prepare statement
       $stmt = $this->conn->prepare($query);
@@ -153,6 +155,8 @@
       $stmt->bindParam(':Gn_hsidrawing', $this->Gn_hsidrawing);
       $stmt->bindParam(':Gn_hsimc', $this->Gn_hsimc);
       $stmt->bindParam(':Gn_hsitargetHour', $this->Gn_hsitargetHour);
+      $stmt->bindParam(':Gn_fixqualitie', $this->Gn_fixqualitie);
+     // Gn_fixqualitie
 
       $stmt->bindParam(':created_at', $strfc);
       $stmt->bindParam(':updated_at', $strfu);
