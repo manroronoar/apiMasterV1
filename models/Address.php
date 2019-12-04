@@ -25,6 +25,7 @@
 
       // Execute query
       $stmt->execute();
+      $stmt->close;
 
       return $stmt;
     }

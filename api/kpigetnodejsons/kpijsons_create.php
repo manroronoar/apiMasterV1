@@ -48,6 +48,18 @@
         $getjson->Gn_hmstr = $row['hmstr'];
         $getjson->Gn_sec = $row['sec'];
         $getjson->Gn_tsupd = $row['tsupd'];
+
+        $getjson->Gn_enoper1 = $row['enop1'];
+        $getjson->Gn_enoper2 = $row['enop2'];
+        $getjson->Gn_enpm1 = $row['enpm1'];
+        $getjson->Gn_enpm2 = $row['enpm2'];
+        $getjson->Gn_enpm1oth1 = $row['enoth1'];
+        $getjson->Gn_enpm1oth2 = $row['enoth2'];
+        $getjson->Gn_hsidrawing = $row['drawing'];
+        $getjson->Gn_hsimc = $row['mc'];
+        $getjson->Gn_hsitargetHour = $row['target'];
+        
+
        // $getjson->created_at = $row['created_at'];
        // $getjson->updated_at = $row['updated_at'];
      
