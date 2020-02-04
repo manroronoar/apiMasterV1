@@ -38,8 +38,8 @@
     public $sumsecbit4 = 0;    public $countbit4 = 0;   public $bit4 = 0;    public $fq4 = 0;
     public $sumsecbit5 = 0;    public $countbit5 = 0;   public $bit5 = 0;    public $fq5 = 0;
     public $sumsecbit6 = 0;    public $countbit6 = 0;   public $bit6 = 0;    public $fq6 = 0;
-  //  public $sumsecbit7 = 0;    public $countbit7 = 0;   public $bit7 = 0;    public $fq7 = 0;
-  //  public $sumsecbit8 = 0;    public $countbit8 = 0;   public $bit8 = 0;    public $fq8 = 0;
+  //public $sumsecbit7 = 0;    public $countbit7 = 0;   public $bit7 = 0;    public $fq7 = 0;
+  //public $sumsecbit8 = 0;    public $countbit8 = 0;   public $bit8 = 0;    public $fq8 = 0;
 
     public function __construct($db) {
       $this->conn = $db;
@@ -63,6 +63,8 @@
       $qr_ac = 0;
       $oee_ac = 0;
 
+      //shift  A   08:00:00   -   19:59:59
+      //shift  B   20:00:00   -   07:59:59
      if ($dateT >= '00:00:00' && $dateT <= '01:59:59')
      {
        $dateS = '23:00:00';
@@ -196,7 +198,7 @@
       
 
         while( $rows = $stmts->fetch(PDO::FETCH_ASSOC)) {
-             echo "Mc. ". $rows["Mc_Number"]."\n". "location : ".$rows["Mc_Location"]."\n";
+             //echo "Mc. ". $rows["Mc_Number"]."\n". "location : ".$rows["Mc_Location"]."\n";
              $mcnumber  = $rows["Mc_Number"];
              $location  = $rows["Mc_Location"];
 
@@ -204,7 +206,7 @@
              $stmt = $this->conn->prepare($query);
              $stmt->execute();
              while( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-             echo $row["Sq_Fixqualitie"]. "\n";
+             //echo $row["Sq_Fixqualitie"]. "\n";
              $oee_tg = $row["Sq_Fixqualitie"];
              }
 
@@ -212,7 +214,7 @@
              $stmt = $this->conn->prepare($query);
              $stmt->execute();
              while( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-             echo $row["Hs_TargetHour"]. "\n"; 
+             //echo $row["Hs_TargetHour"]. "\n"; 
              $pr_tg = $row["Hs_TargetHour"];
              $pr_by_hour = $row["Hs_TargetHour"]/24;
             }
@@ -282,24 +284,26 @@
                 }
 
              }
-             echo  "Bit: ". $bit1." Sumsec: ". $sumsecbit1." CountBit: ". $countbit1." SumFix: ".$fq1."\n";
-             echo  "Bit: ". $bit2." Sumsec: ". $sumsecbit2." CountBit: ". $countbit2." SumFix: ".$fq2."\n";
-             echo  "Bit: ". $bit3." Sumsec: ". $sumsecbit3." CountBit: ". $countbit3." SumFix: ".$fq3."\n";
-             echo  "Bit: ". $bit4." Sumsec: ". $sumsecbit4." CountBit: ". $countbit4." SumFix: ".$fq4."\n";
-             echo  "Bit: ". $bit5." Sumsec: ". $sumsecbit5." CountBit: ". $countbit5." SumFix: ".$fq5."\n";
-             echo  "Bit: ". $bit6." Sumsec: ". $sumsecbit6." CountBit: ". $countbit6." SumFix: ".$fq6."\n";
-             echo "****************************\n";
+
+            // echo  "Bit: ". $bit1." Sumsec: ". $sumsecbit1." CountBit: ". $countbit1." SumFix: ".$fq1."\n";
+            // echo  "Bit: ". $bit2." Sumsec: ". $sumsecbit2." CountBit: ". $countbit2." SumFix: ".$fq2."\n";
+            // echo  "Bit: ". $bit3." Sumsec: ". $sumsecbit3." CountBit: ". $countbit3." SumFix: ".$fq3."\n";
+            // echo  "Bit: ". $bit4." Sumsec: ". $sumsecbit4." CountBit: ". $countbit4." SumFix: ".$fq4."\n";
+            // echo  "Bit: ". $bit5." Sumsec: ". $sumsecbit5." CountBit: ". $countbit5." SumFix: ".$fq5."\n";
+            // echo  "Bit: ". $bit6." Sumsec: ". $sumsecbit6." CountBit: ". $countbit6." SumFix: ".$fq6."\n";
+            // echo "****************************\n";
             // $ar_ac = $sumsecbit1 + $sumsecbit2 +  $sumsecbit3 + $sumsecbit4 + $sumsecbit5 +$sumsecbit6  + $sumsecbit7 + $sumsecbit8 ;
             // $ar_ac = $sumsecbit1 + $sumsecbit2 +  $sumsecbit3 + $sumsecbit4 + $sumsecbit5 +$sumsecbit6   ;
+           
             $ar_ac = 3500;
             $sumsecbit5 = 3400;
             $countbit5 = 200;
             $pr_ac = $countbit5;
 
-            // set oee_ = COALESCE((( (ar_ / 100 ) * (pr_  / 100 ) * (qr_ / 100 ) ) * 100),0);
+            
              $oee_ac = (( $ar_ac / 3600) * ( $countbit5 / $pr_by_hour) * ($oee_tg)) ;
-             echo($countbit5);
-           $query = 'INSERT INTO kpi_report_kpis
+            //echo($countbit5);
+             $query = 'INSERT INTO kpi_report_kpis
              ( Re_McNumber, 
              Re_Ar_Target, 
              Re_Ar_Actual, 
