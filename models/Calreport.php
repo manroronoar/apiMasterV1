@@ -49,6 +49,9 @@
     }
 
 
+    public function calshifts($timeshift) {
+      
+    }
     public function create() {
       //define('CONST_SERVER_TIMEZONE', 'Asia/Bangkok');
       date_default_timezone_set("Asia/Bangkok");
@@ -70,121 +73,145 @@
        $dateS = '23:00:00';
        $dateE = '23:59:59';
        $dateD  = date ("Y-m-d", strtotime("-1 day", strtotime($dateGet)));
+       $shifts = 'A';
      }
      else if ($dateT >= '01:00:00' && $dateT <= '02:59:59')
      {
        $dateS = '00:00:00';
        $dateE = '00:59:59';
+       $shifts = 'A';
      }
      else if ($dateT >= '02:00:00' && $dateT <= '03:59:59')
      {
        $dateS = '01:00:00';
        $dateE = '01:59:59';
+       $shifts = 'A';
      }
      else if ($dateT >= '03:00:00' && $dateT <= '03:59:59')
      {
        $dateS = '02:00:00';
        $dateE = '02:59:59';
+       $shifts = 'A';
      }
      else if ($dateT >= '04:00:00' && $dateT <= '04:59:59')
      {
        $dateS = '03:00:00';
        $dateE = '03:59:59';
+       $shifts = 'A';
      }
      else if ($dateT >= '05:00:00' && $dateT <= '05:59:59')
      {
        $dateS = '04:00:00';
        $dateE = '04:59:59';
+       $shifts = 'A';
      }
      else if ($dateT >= '06:00:00' && $dateT <= '06:59:59')
      {
        $dateS = '05:00:00';
        $dateE = '05:59:59';
+       $shifts = 'A';
      }
      else if ($dateT >= '07:00:00' && $dateT <= '07:59:59')
      {
        $dateS = '06:00:00';
        $dateE = '06:59:59';
+       $shifts = 'B';
      }
      else if ($dateT >= '08:00:00' && $dateT <= '08:59:59')
      {
        $dateS = '07:00:00';
        $dateE = '07:59:59';
+       $shifts = 'B';
      }
      else if ($dateT >= '09:00:00' && $dateT <= '09:59:59')
      {
        $dateS = '08:00:00';
        $dateE = '08:59:59';
+       $shifts = 'B';
      }
      else if ($dateT >= '10:00:00' && $dateT <= '10:59:59')
      {
        $dateS = '09:00:00';
        $dateE = '09:59:59';
+       $shifts = 'B';
      }
      else if ($dateT >= '11:00:00' && $dateT <= '11:59:59')
      {
        $dateS = '10:00:00';
        $dateE = '10:59:59';
+       $shifts = 'B';
      }
      else if ($dateT >= '12:00:00' && $dateT <= '12:59:59')
      {
        $dateS = '11:00:00';
        $dateE = '11:59:59';
+       $shifts = 'B';
      }
      else if ($dateT >= '13:00:00' && $dateT <= '13:59:59')
      {
        $dateS = '12:00:00';
        $dateE = '12:59:59';
+       $shifts = 'B';
      }
      else if ($dateT >= '14:00:00' && $dateT <= '14:59:59')
      {
        $dateS = '13:00:00';
        $dateE = '13:59:59';
+       $shifts = 'B';
      }
      else if ($dateT <= '15:00:00' && $dateT <= '15:59:59')
      {
        $dateS = '14:00:00';
        $dateE = '14:59:59';
+       $shifts = 'B';
      }
      else if ($dateT >= '16:00:00' && $dateT <= '16:59:59')
      {
        $dateS = '15:00:00';
        $dateE = '15:59:59';
+       $shifts = 'B';
      }
      else if ($dateT >= '17:00:00' && $dateT <= '17:59:59')
      {
        $dateS = '16:00:00';
        $dateE = '16:59:59';
+       $shifts = 'B';
      }
      else if ($dateT >= '18:00:00' && $dateT <= '18:59:59')
      {
        $dateS = '17:00:00';
        $dateE = '17:59:59';
+       $shifts = 'B';
      }
      else if ($dateT >= '19:00:00' && $dateT <= '19:59:59')
      {
        $dateS = '18:00:00';
        $dateE = '18:59:59';
+       $shifts = 'B';
      }
      else if ($dateT >= '20:00:00' && $dateT <= '20:59:59')
      {
        $dateS = '19:00:00';
        $dateE = '19:59:59';
+       $shifts = 'A';
      }
      else if ($dateT >= '21:00:00' && $dateT <= '21:59:59')
      {
        $dateS = '20:00:00';
        $dateE = '20:59:59';
+       $shifts = 'A';
      }
      else if ($dateT >= '22:00:00' && $dateT <= '22:59:59')
      {
        $dateS = '21:00:00';
        $dateE = '21:59:59';
+       $shifts = 'A';
      }
      else if ($dateT >= '23:00:00' && $dateT <= '23:59:59')
      {
        $dateS = '22:00:00';
        $dateE = '22:59:59';
+       $shifts = 'A';
      }
 
      $querys = 'SELECT DISTINCT(Mc_Number),Mc_Location FROM ' . $this->table_mcs ;
@@ -196,9 +223,23 @@
         $dateS = '00:00:00';
         $dateE = '23:59:59';
       
-
+        echo "Time: ". $dateT. "\n";
+        echo "DateTime: ".$dateGet .' '.$dateT. "\n";
+        echo "TimeStart: ".$dateGet .' '.$dateS. "\n";
+        echo "TimeEnd: ".$dateGet .' '.$dateE. "\n";
+        
         while( $rows = $stmts->fetch(PDO::FETCH_ASSOC)) {
-             //echo "Mc. ". $rows["Mc_Number"]."\n". "location : ".$rows["Mc_Location"]."\n";
+            $oee_ac = 0;
+            $oee_tg = 0;
+            $pr_ac = 0;
+            $pr_tg = 0;
+            $pr_by_hour = 0;
+            $qr_ac = 0;
+            $qr_tg = 0;
+
+
+
+             echo "Mc. ". $rows["Mc_Number"]."\n". "location : ".$rows["Mc_Location"]."\n";
              $mcnumber  = $rows["Mc_Number"];
              $location  = $rows["Mc_Location"];
 
@@ -206,7 +247,7 @@
              $stmt = $this->conn->prepare($query);
              $stmt->execute();
              while( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-             //echo $row["Sq_Fixqualitie"]. "\n";
+             echo "TargetOee: ".$row["Sq_Fixqualitie"]. "\n";
              $oee_tg = $row["Sq_Fixqualitie"];
              }
 
@@ -214,7 +255,7 @@
              $stmt = $this->conn->prepare($query);
              $stmt->execute();
              while( $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-             //echo $row["Hs_TargetHour"]. "\n"; 
+             echo "Target: ".$row["Hs_TargetHour"]. "\n"; 
              $pr_tg = $row["Hs_TargetHour"];
              $pr_by_hour = $row["Hs_TargetHour"]/24;
             }
@@ -285,13 +326,15 @@
 
              }
 
-            // echo  "Bit: ". $bit1." Sumsec: ". $sumsecbit1." CountBit: ". $countbit1." SumFix: ".$fq1."\n";
-            // echo  "Bit: ". $bit2." Sumsec: ". $sumsecbit2." CountBit: ". $countbit2." SumFix: ".$fq2."\n";
-            // echo  "Bit: ". $bit3." Sumsec: ". $sumsecbit3." CountBit: ". $countbit3." SumFix: ".$fq3."\n";
-            // echo  "Bit: ". $bit4." Sumsec: ". $sumsecbit4." CountBit: ". $countbit4." SumFix: ".$fq4."\n";
-            // echo  "Bit: ". $bit5." Sumsec: ". $sumsecbit5." CountBit: ". $countbit5." SumFix: ".$fq5."\n";
-            // echo  "Bit: ". $bit6." Sumsec: ". $sumsecbit6." CountBit: ". $countbit6." SumFix: ".$fq6."\n";
-            // echo "****************************\n";
+             //echo  "Bit: ". $bit1." Sumsec: ". $sumsecbit1." CountBit: ". $countbit1." SumFix: ".$fq1."\n";
+             //echo  "Bit: ". $bit2." Sumsec: ". $sumsecbit2." CountBit: ". $countbit2." SumFix: ".$fq2."\n";
+             //echo  "Bit: ". $bit3." Sumsec: ". $sumsecbit3." CountBit: ". $countbit3." SumFix: ".$fq3."\n";
+             //echo  "Bit: ". $bit4." Sumsec: ". $sumsecbit4." CountBit: ". $countbit4." SumFix: ".$fq4."\n";
+             //echo  "Bit: ". $bit5." Sumsec: ". $sumsecbit5." CountBit: ". $countbit5." SumFix: ".$fq5."\n";
+             //echo  "Bit: ". $bit6." Sumsec: ". $sumsecbit6." CountBit: ". $countbit6." SumFix: ".$fq6."\n";
+             //echo "****************************\n";
+
+           
             // $ar_ac = $sumsecbit1 + $sumsecbit2 +  $sumsecbit3 + $sumsecbit4 + $sumsecbit5 +$sumsecbit6  + $sumsecbit7 + $sumsecbit8 ;
             // $ar_ac = $sumsecbit1 + $sumsecbit2 +  $sumsecbit3 + $sumsecbit4 + $sumsecbit5 +$sumsecbit6   ;
            
@@ -302,6 +345,14 @@
 
             
              $oee_ac = (( $ar_ac / 3600) * ( $countbit5 / $pr_by_hour) * ($oee_tg)) ;
+             echo  "Oee: ". $oee_ac."\n";
+             echo  "Bit: ". $bit1." Sumsec: ". $sumsecbit1." CountBit: ". $countbit1."\n";
+             echo  "Bit: ". $bit2." Sumsec: ". $sumsecbit2." CountBit: ". $countbit2."\n";
+             echo  "Bit: ". $bit3." Sumsec: ". $sumsecbit3." CountBit: ". $countbit3."\n";
+             echo  "Bit: ". $bit4." Sumsec: ". $sumsecbit4." CountBit: ". $countbit4."\n";
+             echo  "Bit: ". $bit5." Sumsec: ". $sumsecbit5." CountBit: ". $countbit5."\n";
+             echo  "Bit: ". $bit6." Sumsec: ". $sumsecbit6." CountBit: ". $countbit6."\n";
+             echo "****************************\n";
             //echo($countbit5);
              $query = 'INSERT INTO kpi_report_kpis
              ( Re_McNumber, 
@@ -360,17 +411,14 @@
              //'."'".$sumsecbit7."'".',
              //'."'".$countbit8."'".',
              //'."'".$sumsecbit8."'".',
-             ."'". '0' ."'".',
+             ."'". $shifts ."'".',
              '."'".$location."'".',
              '."'".$dateGet .' '.$dateS."'".',
              '."'".$dateGet .' '.$dateE."'".',
              '."'".$dateGet .' '.$dateT."'".' )';
              $stmt = $this->conn->prepare($query);
-             $stmt->execute();
-        }
-  
-    // return $stmt;
-    
+             $stmt->execute();    
+        } 
     }
     
 }
